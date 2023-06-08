@@ -2,5 +2,9 @@
   "tasks": {
     "start": "deno run -A src/cli.ts",
     "dev": "deno run -A --watch src/cli.ts"
+  },
+  "imports": {
+    "cliffy/prompt": "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts",
+    "std/": "https://deno.land/std@0.190.0/"
   }
 }
