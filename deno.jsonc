@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run src/cli.ts",
-    "dev": "deno run --watch src/cli.ts"
+    "start": "deno run -A src/cli.ts",
+    "dev": "deno run -A --watch src/cli.ts"
   }
 }
