@@ -5,6 +5,7 @@
   },
   "imports": {
     "cliffy/prompt": "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts",
-    "std/": "https://deno.land/std@0.190.0/"
+    "std/": "https://deno.land/std@0.190.0/",
+    "zod": "https://deno.land/x/zod@v3.21.4/mod.ts"
   }
 }

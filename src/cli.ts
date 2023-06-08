@@ -1,65 +1,78 @@
-#!/usr/bin/env node
-
-import {
-  isCancel,
-  intro,
-  outro,
-  cancel,
-  text,
-  multiselect,
-} from "npm:@clack/prompts";
-import { resolve } from "node:path";
-import { Dirent, existsSync, readdirSync } from "node:fs";
+import { Input, Select } from "cliffy/prompt";
+import { resolve, join } from "std/path/mod.ts";
+import { exists, walk } from "std/fs/mod.ts";
+import { parse } from "std/toml/mod.ts";
 import { fileTypeFromFile } from "npm:file-type";
-import pMap from "npm:p-map";
+import { z } from "zod";
 
-intro(`bin2npm`);
+const VERSION = "0.0.1";
 
-const pathToBinaries = await text({
-  message: `In which folder are the binaries, which should be wrapped? (Default: '.')`,
-  defaultValue: ".",
-  validate: (value) => {
-    const absolutePath = resolve(value);
-    if (!existsSync(absolutePath)) return "The selected folder does not exist!";
-  },
-});
-
-if (isCancel(pathToBinaries)) {
-  cancel("Operation cancelled.");
-  process.exit(0);
+// Find bin2npm.toml config files somewhere below CWD
+const configsFound = [];
+for await (const dirent of walk(".", { exts: [".toml"] })) {
+  configsFound.push(dirent.path);
 }
 
-const itemsInFolder = readdirSync(pathToBinaries, {
-  withFileTypes: true,
-}).filter((item) => !item.isDirectory() && item.path);
+if (configsFound.length === 0) {
+  console.error(
+    `bin2npm: Couldn't find config file 'bin2npm.toml' in '${Deno.cwd}'`
+  );
+  Deno.exit();
+}
 
-console.log(itemsInFolder);
+// Ask user which config file to use
+const configPath = await Select.prompt({
+  message: "Which config do you want to use?",
+  options: configsFound.map((path) => ({ value: path })),
+});
 
-/**
- *
- * @param {Dirent} item
- * @returns
- */
-const asyncMapper = async (item) => {
-  console.log(item);
-  return await fileTypeFromFile(item.path);
-};
+// Load toml config
+const configString = await Deno.readTextFile(configPath);
+const rawConfig = parse(configString);
 
-const fileTypes = await pMap(itemsInFolder, asyncMapper, { concurrency: 2 });
+// Validate config
+const config = z
+  .object({
+    version: z.string().min(1),
+  })
+  .parse(rawConfig);
 
-console.log(fileTypes);
+if (!VERSION.startsWith(config.version)) {
+  console.error(
+    `
+    Config '${configPath}' version: ${config.version}
+    CLI Version: ${VERSION} 
+    The versions are incompatible! Please upgrade your config or the cli!`
+  );
+  Deno.exit(1);
+}
 
-// const binariesToAdd = await multiselect({
-//   message: "Which binaries should be added?",
-//   options: [
-//     { value: "eslint", label: "ESLint", hint: "recommended" },
-//     { value: "prettier", label: "Prettier" },
-//     { value: "gh-action", label: "GitHub Action" },
-//   ],
-//   required: false,
+// Log config
+console.log(`Using Config:  `, config);
+
+// const pathToBinaries = await Input.prompt({
+//   message: `Where to find the bin2npm.toml config file? (Default: '.')`,
+//   default: "bin2npm.toml",
+//   hint: "This must be a valid path to an existing folder including bin2npm.toml or to the bin2npm.toml file itself!",
+//   validate: async (path) => {
+//     const targetStats = await Deno.lstat(path);
+
+//     if (targetStats.isDirectory) {
+//       path = join(path, "bin2npm.toml");
+//     }
+
+//     return await exists(path, {
+//       isFile: true,
+//       isReadable: true,
+//     });
+//   },
 // });
 
-// handlePossibleCancellation();
+// Using maxDepth: 1 to make it simple for now. May be relaxed in the future
+// for await (const dirent of walk(pathToBinaries, { maxDepth: 1 })) {
+//   if (dirent.isDirectory) continue;
+//   const binaryFileType = await fileTypeFromFile(dirent.path);
+//   console.log({ dirent, binaryFileType });
+// }
 
-// outro(`Finished! Find your new package in the dist folder!`);
-outro(`CLI Finished! Go on working...`);
+// console.log(pathToBinaries);
