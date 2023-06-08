@@ -1,0 +1,27 @@
+{
+  "name": "bin2npm",
+  "version": "0.0.1",
+  "description": "A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution",
+  "bin": {
+    "bin2npm": "./src/cli.mjs"
+  },
+  "scripts": {
+    "start": "node ./src/cli.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjesuiter/bin2npm.git"
+  },
+  "keywords": [
+    "cli",
+    "binary",
+    "wrapper",
+    "standalone"
+  ],
+  "author": "Benjamin Jesuiter <bjesuiter@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bjesuiter/bin2npm/issues"
+  },
+  "homepage": "https://github.com/bjesuiter/bin2npm#readme"
+}
