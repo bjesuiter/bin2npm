@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/bjesuiter/bin2npm/issues"
   },
-  "homepage": "https://github.com/bjesuiter/bin2npm#readme"
+  "homepage": "https://github.com/bjesuiter/bin2npm#readme",
+  "dependencies": {
+    "execa": "^7.1.1"
+  }
 }
