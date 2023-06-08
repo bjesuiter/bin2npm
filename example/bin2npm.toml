@@ -28,7 +28,7 @@ arch = "x64"
 # arch = "x64"
 
 # use for testing error: "Two or more binaries configured with same platform and arch!"
-[[binaries]]
-path = "bonnie-windows-amd64.exe"
-platform = "win32"
-arch = "x64"
+# [[binaries]]
+# path = "bonnie-windows-amd64.exe"
+# platform = "win32"
+# arch = "x64"
