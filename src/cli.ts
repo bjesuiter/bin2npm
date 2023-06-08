@@ -1,9 +1,7 @@
-import { Input, Select } from "cliffy/prompt";
-import { resolve, join, dirname } from "std/path/mod.ts";
+import { Select } from "cliffy/prompt";
+import { join, dirname } from "std/path/mod.ts";
 import { exists, walk } from "std/fs/mod.ts";
 import { parse } from "std/toml/mod.ts";
-import { fileTypeFromFile } from "npm:file-type";
-import { z } from "zod";
 import { Bin2NpmConfig, BinaryConfig } from "./types.ts";
 
 const VERSION = "0.0.1";
