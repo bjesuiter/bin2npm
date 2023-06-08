@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution",
   "bin": {
-    "bin2npm": "./src/bin/cli.mjs"
+    "bin2npm": "./src/cli.mjs"
   },
+  "type": "module",
   "scripts": {
     "start": "node ./src/cli.mjs"
   },
@@ -26,7 +27,9 @@
   "homepage": "https://github.com/bjesuiter/bin2npm#readme",
   "dependencies": {
     "@clack/prompts": "^0.6.3",
-    "execa": "^7.1.1"
+    "execa": "^7.1.1",
+    "file-type": "^18.5.0",
+    "p-map": "^6.0.0"
   },
   "devDependencies": {
     "np": "^8.0.2"
