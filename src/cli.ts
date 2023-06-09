@@ -12,7 +12,9 @@ const VERSION = "0.0.1";
 
 // Find bin2npm.toml config files somewhere below CWD
 const configsFound = [];
-for await (const dirent of walk(".", { exts: [".toml"] })) {
+for await (
+  const dirent of walk(".", { exts: [".toml"], match: [/bin2npm.toml/] })
+) {
   configsFound.push(dirent.path);
 }
 
