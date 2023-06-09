@@ -4,10 +4,10 @@
     "dev": "deno run -A --watch src/cli.ts",
     "compile": "deno task compile-linux-x64 & deno task compile-windows-x64 & deno task compile-macos-x64 & deno task compile-macos-arm",
     "compile-base": "deno compile --allow-read='.' --allow-write='.' ",
-    "compile-linux-x64": "deno task compile-base --output dist/bin2npm_linux_x64 --target x86_64-unknown-linux-gnu src/cli.ts ",
-    "compile-windows-x64": "deno task compile-base --output dist/bin2npm_windows_x64 --target x86_64-pc-windows-msvc src/cli.ts ",
-    "compile-macos-x64": "deno task compile-base --output dist/bin2npm_macos_x64 --target x86_64-apple-darwin src/cli.ts ",
-    "compile-macos-arm": "deno task compile-base --output dist/bin2npm_macos_arm --target aarch64-apple-darwin src/cli.ts ",
+    "compile-linux-x64": "deno task compile-base --output npm/bin/bin2npm_linux_x64 --target x86_64-unknown-linux-gnu src/cli.ts ",
+    "compile-windows-x64": "deno task compile-base --output npm/bin/bin2npm_windows_x64 --target x86_64-pc-windows-msvc src/cli.ts ",
+    "compile-macos-x64": "deno task compile-base --output npm/bin/bin2npm_macos_x64 --target x86_64-apple-darwin src/cli.ts ",
+    "compile-macos-arm": "deno task compile-base --output npm/bin/bin2npm_macos_arm --target aarch64-apple-darwin src/cli.ts ",
     "run-compiled-macos": "dist/bin2npm_macos_x64"
   },
   "imports": {
