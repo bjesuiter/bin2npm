@@ -1,4 +1,5 @@
-import { ensureFile } from "std/fs/mod.ts";
+import { isWindows } from "std/_util/os.ts";
+import { ensureFile, ensureFileSync } from "std/fs/mod.ts";
 import { join } from "std/path/mod.ts";
 import { BinaryConfig } from "../types.ts";
 
@@ -9,23 +10,29 @@ import { BinaryConfig } from "../types.ts";
  */
 export async function renderExecutables(
   binariesMap: Map<string, Array<BinaryConfig>>,
-  outPath?: string
+  basePath: string,
+  outPath = "dist/"
 ) {
-  if (!outPath) {
-    outPath = `dist/`;
-  }
-
   const executables = Object.fromEntries(
-    Array.from(binariesMap.entries()).map(([platformArchKey, binaryArray]) => [
-      platformArchKey,
-      binaryArray[0],
-    ])
+    Array.from(binariesMap.entries()).map(([platformArchKey, binaryArray]) => {
+      const currentBin = binaryArray[0];
+      return [platformArchKey, currentBin];
+    })
   );
 
-  const outFile = join(outPath, "bin/executables.json");
+  // copy the executables needed
+  Object.values(executables).forEach((bin) => {
+    const binOutPath = join(outPath, "bin", bin.path);
+    ensureFileSync(binOutPath);
 
+    Deno.copyFileSync(join(basePath, bin.path), binOutPath);
+    if (!isWindows) Deno.chmodSync(binOutPath, 0o775);
+  });
+
+  // write the executables.json file
+  const outFile = join(outPath, "bin/executables.json");
   await ensureFile(outFile);
   await Deno.writeTextFile(outFile, JSON.stringify(executables, null, "\t"));
 
-  console.info(`Rendered bin/exectuables.json!`);
+  console.info(`Rendered bin/exectuables.json + copied executables!`);
 }

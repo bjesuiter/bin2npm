@@ -1,3 +1,4 @@
+import { resolve } from "std/path/mod.ts";
 import { BinaryConfig } from "../types.ts";
 import { renderExecutables } from "./executables.template.ts";
 
@@ -6,7 +7,7 @@ Deno.test(`Test bin/exectuables.json rendering`, () => {
 
   binariesMap.set("darwin-x64", [
     {
-      path: "macos-executable",
+      path: "bonnie-macos-amd64",
       platform: "darwin",
       arch: "x64",
     },
@@ -14,7 +15,7 @@ Deno.test(`Test bin/exectuables.json rendering`, () => {
 
   binariesMap.set("linux-x64", [
     {
-      path: "linux-executable",
+      path: "bonnie-linux-amd64",
       platform: "linux",
       arch: "x64",
     },
@@ -22,11 +23,12 @@ Deno.test(`Test bin/exectuables.json rendering`, () => {
 
   binariesMap.set("win32-x64", [
     {
-      path: "windows-executable.exe",
+      path: "bonnie-windows-amd64.exe",
       platform: "win32",
       arch: "x64",
     },
   ]);
 
-  renderExecutables(binariesMap);
+  // resolve will resolve from CWD when running the tests, NOT from the location of this test file!
+  renderExecutables(binariesMap, resolve("example"));
 });
