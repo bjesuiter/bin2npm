@@ -45,35 +45,29 @@ if (!VERSION.startsWith(config.bin2NpmVersion)) {
   Deno.exit(1);
 }
 
-// Stores the configs by platform and arch
-const configCounts = new Map<string, Map<string, Array<BinaryConfig>>>();
+// Stores the configs by key "platform-arch"
+const configMap = new Map<string, Array<BinaryConfig>>();
 
 for (const bin of config.binaries) {
   const binExists = await exists(join(basePath, bin.path));
-
   if (!binExists) {
     console.error(`ERROR: A binary is configured but could not be found!`, bin);
     Deno.exit(2);
   }
 
+  const binKey = `${bin.platform}-${bin.arch}`;
+
   // Check existence of platform map
-  if (!configCounts.has(bin.platform)) {
-    configCounts.set(bin.platform, new Map<string, Array<BinaryConfig>>());
+  if (!configMap.has(binKey)) {
+    configMap.set(binKey, []);
   }
-  const platformMap = configCounts.get(bin.platform);
+  const binConfigArray = configMap.get(binKey);
+  binConfigArray?.push(bin);
 
-  // Check existence of arch map
-  if (!platformMap?.has(bin.arch)) {
-    platformMap?.set(bin.arch, []);
-  }
-  const archArray = platformMap?.get(bin.arch);
-
-  archArray?.push(bin);
-
-  if ((archArray?.length ?? 0) > 1) {
+  if ((binConfigArray?.length ?? 0) > 1) {
     console.error(
       `ERROR: Found multiple binaries for same platform and arch!`,
-      archArray
+      binConfigArray
     );
     Deno.exit(3);
   }

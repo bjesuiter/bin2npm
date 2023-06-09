@@ -1,5 +1,10 @@
 bin2NpmVersion = "0"
 
+[targetPackageJson]
+name = "bin2npm-example"
+version = "0.0.1"
+description = "An example wrapped package with bin2npm"
+
 [[binaries]]
 path = "bonnie-linux-amd64"
 # platform should be one of nodejs's os.platform() values:
@@ -33,7 +38,3 @@ arch = "x64"
 # platform = "win32"
 # arch = "x64"
 
-[targetPackageJson]
-name = "bin2npm-example"
-version = "0.0.1"
-description = "An example wrapped package with bin2npm"
