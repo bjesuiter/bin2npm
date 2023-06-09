@@ -46,7 +46,7 @@ if (!VERSION.startsWith(config.bin2NpmVersion)) {
 }
 
 // Stores the configs by key "platform-arch"
-const configMap = new Map<string, Array<BinaryConfig>>();
+const binariesMap = new Map<string, Array<BinaryConfig>>();
 
 for (const bin of config.binaries) {
   const binExists = await exists(join(basePath, bin.path));
@@ -58,10 +58,10 @@ for (const bin of config.binaries) {
   const binKey = `${bin.platform}-${bin.arch}`;
 
   // Check existence of platform map
-  if (!configMap.has(binKey)) {
-    configMap.set(binKey, []);
+  if (!binariesMap.has(binKey)) {
+    binariesMap.set(binKey, []);
   }
-  const binConfigArray = configMap.get(binKey);
+  const binConfigArray = binariesMap.get(binKey);
   binConfigArray?.push(bin);
 
   if ((binConfigArray?.length ?? 0) > 1) {
