@@ -48,10 +48,10 @@ const packageJson = {
 
 export async function renderPackageJson(
   config: TargetPackageJson,
-  outPath?: string
+  outDir?: string
 ) {
-  if (!outPath) {
-    outPath = `dist/`;
+  if (!outDir) {
+    outDir = `dist/`;
   }
 
   packageJson.name = config.name;
@@ -62,7 +62,7 @@ export async function renderPackageJson(
   binEntries.push([config.name, "./bin/entrypoint.mjs"]);
   packageJson.bin = Object.fromEntries(binEntries);
 
-  const outFile = join(outPath, "package.json");
+  const outFile = join(outDir, "package.json");
 
   await ensureFile(outFile);
   await Deno.writeTextFile(outFile, JSON.stringify(packageJson, null, "\t"));
