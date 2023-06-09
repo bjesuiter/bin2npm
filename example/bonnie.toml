@@ -3,5 +3,6 @@
 version = "0.3.2"
 
 [scripts]
+    echo   = "echo Test"
     test   = "echo Test"
     foobar = "echo \"Foo and Bar\""
