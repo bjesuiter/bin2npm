@@ -1,5 +1,5 @@
 import { Select } from "cliffy/prompt";
-import { join, dirname } from "std/path/mod.ts";
+import { dirname, join } from "std/path/mod.ts";
 import { exists, walk } from "std/fs/mod.ts";
 import { parse } from "std/toml/mod.ts";
 import { Bin2NpmConfig, BinaryConfig } from "./types.ts";
@@ -7,6 +7,7 @@ import { renderPackageJson } from "./builder/package.json.template.ts";
 import { renderExecutables } from "./builder/executables.template.ts";
 import { copyAssets } from "./builder/copy-assets.ts";
 
+// Note: This is the version of this bin2npm cli! Do not confuse this with the version of the resulting packages!
 const VERSION = "0.0.1";
 
 // Find bin2npm.toml config files somewhere below CWD
@@ -17,7 +18,7 @@ for await (const dirent of walk(".", { exts: [".toml"] })) {
 
 if (configsFound.length === 0) {
   console.error(
-    `ERROR: Couldn't find config file 'bin2npm.toml' in '${Deno.cwd}'`
+    `ERROR: Couldn't find config file 'bin2npm.toml' in '${Deno.cwd}'`,
   );
   Deno.exit();
 }
@@ -43,7 +44,7 @@ if (!VERSION.startsWith(config.bin2NpmVersion)) {
     `ERROR:
     Config '${configPath}' version: ${config.bin2NpmVersion}
     CLI Version: ${VERSION} 
-    The versions are incompatible! Please upgrade your config or the cli!`
+    The versions are incompatible! Please upgrade your config or the cli!`,
   );
   Deno.exit(1);
 }
@@ -70,7 +71,7 @@ for (const bin of config.binaries) {
   if ((binConfigArray?.length ?? 0) > 1) {
     console.error(
       `ERROR: Found multiple binaries for same platform and arch!`,
-      binConfigArray
+      binConfigArray,
     );
     Deno.exit(3);
   }
