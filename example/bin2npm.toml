@@ -1,4 +1,4 @@
-version = "0"
+bin2NpmVersion = "0"
 
 [[binaries]]
 path = "bonnie-linux-amd64"

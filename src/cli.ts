@@ -35,10 +35,10 @@ const rawConfig = parse(configString);
 // Validate config
 const config = Bin2NpmConfig.parse(rawConfig);
 
-if (!VERSION.startsWith(config.version)) {
+if (!VERSION.startsWith(config.bin2NpmVersion)) {
   console.error(
     `ERROR:
-    Config '${configPath}' version: ${config.version}
+    Config '${configPath}' version: ${config.bin2NpmVersion}
     CLI Version: ${VERSION} 
     The versions are incompatible! Please upgrade your config or the cli!`
   );

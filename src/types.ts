@@ -9,7 +9,7 @@ export const BinaryConfig = z.object({
 export type BinaryConfig = z.infer<typeof BinaryConfig>;
 
 export const Bin2NpmConfig = z.object({
-  version: z.string().min(1),
+  bin2NpmVersion: z.string().min(1),
   binaries: z.array(BinaryConfig),
 });
 
