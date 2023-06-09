@@ -26,6 +26,7 @@ export type TargetPackageJson = z.infer<typeof TargetPackageJson>;
 
 export const Bin2NpmConfig = z.object({
   bin2NpmVersion: z.string().min(1),
+  outDir: z.string().default("dist/"),
   binaries: z.array(BinaryConfig),
   targetPackageJson: TargetPackageJson,
 });

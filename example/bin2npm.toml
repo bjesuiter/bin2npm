@@ -1,40 +1,40 @@
 bin2NpmVersion = "0"
+outDir         = "example/dist"
 
 [targetPackageJson]
-name = "bin2npm-example"
-version = "0.0.1"
-description = "An example wrapped package with bin2npm"
+    name        = "bin2npm-example"
+    version     = "0.0.1"
+    description = "An example wrapped package with bin2npm"
 
 [[binaries]]
-path = "bonnie-linux-amd64"
-# platform should be one of nodejs's os.platform() values:
-# for Node 16 LTS: 'aix', 'darwin', 'freebsd','linux', 'openbsd', 'sunos', and 'win32'
-# see https://nodejs.org/docs/latest-v16.x/api/os.html#osplatform
-platform = "linux"
-# arch should be one of nodejs's os.arch() values: 
-# for Node 16 LTS: 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', and 'x64'
-# see https://nodejs.org/docs/latest-v16.x/api/os.html#osarch
-arch = "x64"
+    path = "bonnie-linux-amd64"
+    # platform should be one of nodejs's os.platform() values:
+    # for Node 16 LTS: 'aix', 'darwin', 'freebsd','linux', 'openbsd', 'sunos', and 'win32'
+    # see https://nodejs.org/docs/latest-v16.x/api/os.html#osplatform
+    platform = "linux"
+    # arch should be one of nodejs's os.arch() values: 
+    # for Node 16 LTS: 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', and 'x64'
+    # see https://nodejs.org/docs/latest-v16.x/api/os.html#osarch
+    arch = "x64"
 
 [[binaries]]
-path = "bonnie-macos-amd64"
-platform = "darwin"
-arch = "x64"
+    path     = "bonnie-macos-amd64"
+    platform = "darwin"
+    arch     = "x64"
 
 [[binaries]]
-path = "bonnie-windows-amd64.exe"
-platform = "win32"
-arch = "x64"
+    path     = "bonnie-windows-amd64.exe"
+    platform = "win32"
+    arch     = "x64"
 
-# use for testing error: "Binary configured but not found!"
-# [[binaries]]
-# path = "bonnie-bob-amd64"
-# platform = "openbsd"
-# arch = "x64"
+    # use for testing error: "Binary configured but not found!"
+    # [[binaries]]
+    # path = "bonnie-bob-amd64"
+    # platform = "openbsd"
+    # arch = "x64"
 
-# use for testing error: "Two or more binaries configured with same platform and arch!"
-# [[binaries]]
-# path = "bonnie-windows-amd64.exe"
-# platform = "win32"
-# arch = "x64"
-
+    # use for testing error: "Two or more binaries configured with same platform and arch!"
+    # [[binaries]]
+    # path = "bonnie-windows-amd64.exe"
+    # platform = "win32"
+    # arch = "x64"

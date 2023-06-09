@@ -83,7 +83,6 @@ for (const bin of config.binaries) {
 console.log(`Using Config:  `, config);
 
 // Assemble the package!
-// TODO: Allow customization of the outPath! (currently /dist per default!)
-await renderPackageJson(config.targetPackageJson);
-await renderExecutables(binariesMap, configBasePath);
-await copyAssets();
+await renderPackageJson(config.targetPackageJson, config.outDir);
+await renderExecutables(binariesMap, configBasePath, config.outDir);
+await copyAssets(config.outDir);
