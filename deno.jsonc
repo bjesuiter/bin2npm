@@ -8,7 +8,8 @@
     "compile-windows-x64": "deno task compile-base --output compiled/bin2npm_windows_x64 --target x86_64-pc-windows-msvc src/cli.ts ",
     "compile-macos-x64": "deno task compile-base --output compiled/bin2npm_macos_x64 --target x86_64-apple-darwin src/cli.ts ",
     "compile-macos-arm": "deno task compile-base --output compiled/bin2npm_macos_arm --target aarch64-apple-darwin src/cli.ts ",
-    "run-compiled-macos": "compiled/bin2npm_macos_x64"
+    "run-compiled-macos": "compiled/bin2npm_macos_x64",
+    "publish-npm": "npm publish ./npm"
   },
   "imports": {
     "cliffy/prompt": "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts",
