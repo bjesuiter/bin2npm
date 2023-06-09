@@ -20,7 +20,7 @@ export async function copyAssets(
 
   if (extraAssets && extraAssets.length > 0) {
     for (const asset of extraAssets) {
-      await copy(asset.path, join(outDir, asset.path));
+      await copy(asset.path, join(outDir, asset.path), { overwrite: true });
     }
   }
 
