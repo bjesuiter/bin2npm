@@ -9,6 +9,7 @@
     "compile-macos-x64": "deno task compile-base --output compiled/bin2npm_macos_x64 --target x86_64-apple-darwin src/cli.ts ",
     "compile-macos-arm": "deno task compile-base --output compiled/bin2npm_macos_arm --target aarch64-apple-darwin src/cli.ts ",
     "run-compiled-macos": "compiled/bin2npm_macos_x64",
+    // CAUTION: This publish task can take a long time, due to the big binaries included!
     "publish-npm": "npm publish ./npm"
   },
   "imports": {
