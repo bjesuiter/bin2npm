@@ -31,3 +31,6 @@ outDir         = "npm"
     path     = "compiled/bin2npm_windows_x64.exe"
     platform = "win32"
     arch     = "x64"
+
+[[extraAssets]]
+    path = "template"

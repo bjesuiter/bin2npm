@@ -85,4 +85,4 @@ console.log(`Using Config:  `, config);
 // Assemble the package!
 await renderPackageJson(config.targetPackageJson, config.outDir);
 await renderExecutables(binariesMap, configBasePath, config.outDir);
-await copyAssets(config.outDir);
+await copyAssets(config.extraAssets, config.outDir);

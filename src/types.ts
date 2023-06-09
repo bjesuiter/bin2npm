@@ -24,11 +24,17 @@ export const TargetPackageJson = z.object({
 });
 export type TargetPackageJson = z.infer<typeof TargetPackageJson>;
 
+export const ExtraAssetsConfig = z.array(z.object({
+  path: z.string(),
+})).optional();
+export type ExtraAssetsConfig = z.infer<typeof ExtraAssetsConfig>;
+
 export const Bin2NpmConfig = z.object({
   bin2NpmVersion: z.string().min(1),
   outDir: z.string().default("dist/"),
   binaries: z.array(BinaryConfig),
   targetPackageJson: TargetPackageJson,
+  extraAssets: ExtraAssetsConfig,
 });
 
 export type Bin2NpmConfig = z.infer<typeof Bin2NpmConfig>;
