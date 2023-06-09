@@ -3,6 +3,9 @@ import { join, dirname } from "std/path/mod.ts";
 import { exists, walk } from "std/fs/mod.ts";
 import { parse } from "std/toml/mod.ts";
 import { Bin2NpmConfig, BinaryConfig } from "./types.ts";
+import { renderPackageJson } from "./builder/package.json.template.ts";
+import { renderExecutables } from "./builder/executables.template.ts";
+import { copyAssets } from "./builder/copy-assets.ts";
 
 const VERSION = "0.0.1";
 
@@ -26,7 +29,7 @@ const configPath = await Select.prompt({
 });
 
 // Define base path for naviation relative to toml config
-const basePath = dirname(configPath);
+const configBasePath = dirname(configPath);
 
 // Load toml config
 const configString = await Deno.readTextFile(configPath);
@@ -49,7 +52,7 @@ if (!VERSION.startsWith(config.bin2NpmVersion)) {
 const binariesMap = new Map<string, Array<BinaryConfig>>();
 
 for (const bin of config.binaries) {
-  const binExists = await exists(join(basePath, bin.path));
+  const binExists = await exists(join(configBasePath, bin.path));
   if (!binExists) {
     console.error(`ERROR: A binary is configured but could not be found!`, bin);
     Deno.exit(2);
@@ -76,29 +79,8 @@ for (const bin of config.binaries) {
 // Log config
 console.log(`Using Config:  `, config);
 
-// const pathToBinaries = await Input.prompt({
-//   message: `Where to find the bin2npm.toml config file? (Default: '.')`,
-//   default: "bin2npm.toml",
-//   hint: "This must be a valid path to an existing folder including bin2npm.toml or to the bin2npm.toml file itself!",
-//   validate: async (path) => {
-//     const targetStats = await Deno.lstat(path);
-
-//     if (targetStats.isDirectory) {
-//       path = join(path, "bin2npm.toml");
-//     }
-
-//     return await exists(path, {
-//       isFile: true,
-//       isReadable: true,
-//     });
-//   },
-// });
-
-// Using maxDepth: 1 to make it simple for now. May be relaxed in the future
-// for await (const dirent of walk(pathToBinaries, { maxDepth: 1 })) {
-//   if (dirent.isDirectory) continue;
-//   const binaryFileType = await fileTypeFromFile(dirent.path);
-//   console.log({ dirent, binaryFileType });
-// }
-
-// console.log(pathToBinaries);
+// Assemble the package!
+// TODO: Allow customization of the outPath! (currently /dist per default!)
+await renderPackageJson(config.targetPackageJson);
+await renderExecutables(binariesMap, configBasePath);
+await copyAssets();
