@@ -1,0 +1,7 @@
+# This file is only for testing the output of bin2npm. 
+# Copy this to the ./dist folder 
+version = "0.3.2"
+
+[scripts]
+    test   = "echo Test"
+    foobar = "echo \"Foo and Bar\""
