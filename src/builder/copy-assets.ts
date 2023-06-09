@@ -6,6 +6,7 @@ import { join } from "std/path/mod.ts";
 
 export async function copyAssets(outPath = "dist/") {
   await Deno.copyFile(`./template/index.mjs`, join(outPath, "index.mjs"));
+  await Deno.copyFile(`./template/.gitignore`, join(outPath, ".gitignore"));
 
   // copy entrypoint script for resulting cli
   const entrypointPath = join(outPath, "bin/entrypoint.mjs");
