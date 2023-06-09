@@ -1,4 +1,5 @@
 import { join } from "std/path/mod.ts";
+import { ensureFile } from "std/fs/mod.ts";
 import { TargetPackageJson } from "../types.ts";
 
 const packageJson = {
@@ -20,6 +21,7 @@ const packageJson = {
     "bin",
     "Readme.md",
     "package.json",
+    ".gitignore",
   ],
   scripts: {
     start: "node ./bin/entrypoint.mjs",
@@ -60,10 +62,10 @@ export async function renderPackageJson(
   binEntries.push([config.name, "./bin/entrypoint.mjs"]);
   packageJson.bin = Object.fromEntries(binEntries);
 
-  await Deno.writeTextFile(
-    join(outPath, "package.json"),
-    JSON.stringify(packageJson, null, "\t")
-  );
+  const outFile = join(outPath, "package.json");
+
+  await ensureFile(outFile);
+  await Deno.writeTextFile(outFile, JSON.stringify(packageJson, null, "\t"));
 
   console.info(`Rendered package.json!`);
 }
