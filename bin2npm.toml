@@ -5,6 +5,7 @@ outDir         = "npm"
     name        = "bin2npm"
     version     = "0.0.1"
     description = "A cli tool by @bjesuiter which takes one or more binaries for different platforms and wraps them into an npm package for distribution. Can also be used via bin2npm package on npmjs.org"
+    extraFiles  = ['template']
 
 [[binaries]]
     path = "compiled/bin2npm_linux_x64"

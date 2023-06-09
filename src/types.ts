@@ -21,6 +21,9 @@ export const TargetPackageJson = z.object({
   // The main binary name will always be the same as the package name!
   // TODO @bjesuiter: Test whether its working in shell with npm scopes!
   binAliases: z.array(z.string()).optional(),
+
+// A list of files or folder which will be added to the package.json > files array to be included in the final package
+  extraFiles: z.array(z.string()).optional(),
 });
 export type TargetPackageJson = z.infer<typeof TargetPackageJson>;
 
