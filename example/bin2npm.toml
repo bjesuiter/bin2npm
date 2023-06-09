@@ -32,3 +32,8 @@ arch = "x64"
 # path = "bonnie-windows-amd64.exe"
 # platform = "win32"
 # arch = "x64"
+
+[targetPackageJson]
+name = "bin2npm-example"
+version = "0.0.1"
+description = "An example wrapped package with bin2npm"
