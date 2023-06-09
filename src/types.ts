@@ -15,6 +15,12 @@ export const TargetPackageJson = z.object({
   name: z.string().min(1),
   version: SemVer,
   description: z.string(),
+
+  // binAliases will be added to the "bin" field in the package.json and will point to the same main entrypoint.
+  // This allows publishing the same binary under multiple names, for example a long and a short name.
+  // The main binary name will always be the same as the package name!
+  // TODO @bjesuiter: Test whether its working in shell with npm scopes!
+  binAliases: z.array(z.string()).optional(),
 });
 export type TargetPackageJson = z.infer<typeof TargetPackageJson>;
 
