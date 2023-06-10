@@ -22,13 +22,15 @@ export const TargetPackageJson = z.object({
   // TODO @bjesuiter: Test whether its working in shell with npm scopes!
   binAliases: z.array(z.string()).optional(),
 
-// A list of files or folder which will be added to the package.json > files array to be included in the final package
+  // A list of files or folder which will be added to the package.json > files array to be included in the final package
   extraFiles: z.array(z.string()).optional(),
 });
 export type TargetPackageJson = z.infer<typeof TargetPackageJson>;
 
 export const ExtraAssetsConfig = z.array(z.object({
-  path: z.string(),
+  from: z.string(),
+  // Note: this 'to' path will be appended after the output path
+  to: z.string(),
 })).optional();
 export type ExtraAssetsConfig = z.infer<typeof ExtraAssetsConfig>;
 

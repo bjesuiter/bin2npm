@@ -38,7 +38,7 @@ export async function copyAssets(
 
   if (extraAssets && extraAssets.length > 0) {
     for (const asset of extraAssets) {
-      await copy(asset.path, join(outDir, asset.path), { overwrite: true });
+      await copy(asset.from, join(outDir, asset.to), { overwrite: true });
     }
   }
 
