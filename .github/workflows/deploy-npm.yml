@@ -10,6 +10,8 @@ jobs:
   Compile-Bin2Npm:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - name: Setup Deno
         # You may pin to the exact commit or the version.
         # uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31
@@ -22,8 +24,7 @@ jobs:
         with:
           path: ${{ env.DENO_DIR }}
           key: ${{ hashFiles('deno.lock') }}
-      - name: Check out repository code
-        uses: actions/checkout@v3
+
       - run: deno task pack-assets
       - run: deno task compile
       - run: deno task assemble-npm
