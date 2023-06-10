@@ -8,7 +8,7 @@ import { renderExecutables } from "./builder/executables.template.ts";
 import { copyAssets } from "./builder/copy-assets.ts";
 
 // Note: This is the version of this bin2npm cli! Do not confuse this with the version of the resulting packages!
-const VERSION = "0.0.1";
+const VERSION = "0.0.3";
 
 // Find bin2npm.toml config files somewhere below CWD
 const configsFound = [];

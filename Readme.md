@@ -34,13 +34,20 @@ IMPORTANT: This MUST also be done for the deno variant, otherwise the package wi
 
 ### Building the npm package
 
-1. Run `deno task compile`
-2. Run `deno task start` and choose the top-level bin2npm.toml => This runs bin2npm on the compiled output of itself! (Great, isn't it?!?)
-3. Run `npm publish ./npm` to publish on npm
+1. Increase versions:
+   1. In `cli.ts` for the bin2npm cli
+   2. Of target npm package by updating the version in `./bin2npm.toml`
+2. Run `deno task compile`
+3. Run `deno task start` and choose the top-level bin2npm.toml => This runs bin2npm on the compiled output of itself! (Great, isn't it?!?)
+4. Run `deno task publish-npm` to publish on npm
 
 ---
 
 # Changelog
+
+## 0.0.3 - 2023-06-10
+
+- fix missing assets for both deno.land/x and npm, by inlining the assets as base64
 
 ## 0.0.2 - 2023-06-10
 
