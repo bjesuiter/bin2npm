@@ -2,11 +2,35 @@
 
 A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution.
 
-## Usage 
+## Installation via deno
 
-TODO @bjesuiter
+1. Install from deno.land/x (installs exactly this url, so it will always run the latest version of itself!)
+   `deno install --allow-read='.' --allow-write='.' -n bin2npm https://deno.land/x/bin2npm/src/cli.ts`
+
+2. Write a config (TODO @bjesuiter)
+
+## Installation via npm
+
+Global Installation: `npm i -g bin2npm`
+
+Local Installation: `npm i -D bin2npm`
+
+## Usage (for both deno & npm)
+
+1. Write a config file (TODO @bjesuiter)
+2. Run `bin2npm` => It will search for all bin2npm.toml files inside your CWD
+3. Finished! If your config was correct, then your output npm package should be in your configured output dir!
+
+If you have any issues, please open an Issue at:
+https://github.com/bjesuiter/bin2npm/issues
 
 ## For Developers of this package
+
+## Use `asset_builder` from (https://deno.land/x/asset_builder) to have the template folder available to the deno cli.
+
+Run `deno task pack-assets` to pack the files in `/template` into `src-gen/assets.ts`
+
+IMPORTANT: This MUST also be done for the deno variant, otherwise the package will not work when installed from deno.land/x!
 
 ### Building the npm package
 
