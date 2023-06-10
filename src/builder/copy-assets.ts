@@ -1,7 +1,8 @@
-import { copy, ensureFile } from "std/fs/mod.ts";
+import { copy, ensureDir, ensureFile } from "std/fs/mod.ts";
 import { isWindows } from "std/_util/os.ts";
 import { join } from "std/path/mod.ts";
 import { ExtraAssetsConfig } from "../types.ts";
+import assets from "../../src-gen/assets.ts";
 
 // When run on macos or isLinux, it sets executable flag on entrypoint.mjs
 
@@ -9,13 +10,30 @@ export async function copyAssets(
   extraAssets?: ExtraAssetsConfig,
   outDir = "dist/",
 ) {
-  await Deno.copyFile(`./template/index.mjs`, join(outDir, "index.mjs"));
-  await Deno.copyFile(`./template/.gitignore`, join(outDir, ".gitignore"));
+  await ensureDir(outDir);
+
+  await Deno.writeFile(
+    join(outDir, ".gitignore"),
+    assets.files[".gitignore"].content,
+    { create: true },
+  );
+  await Deno.writeFile(
+    join(outDir, "index.mjs"),
+    assets.files["index.mjs"].content,
+    { create: true },
+  );
+
+  // await Deno.copyFile(`./template/.gitignore`, join(outDir, ".gitignore"));
+  // await Deno.copyFile(`./template/index.mjs`, join(outDir, "index.mjs"));
 
   // copy entrypoint script for resulting cli
   const entrypointPath = join(outDir, "bin/entrypoint.mjs");
   await ensureFile(entrypointPath);
-  await Deno.copyFile(`./template/bin/entrypoint.mjs`, entrypointPath);
+  await Deno.writeFile(
+    entrypointPath,
+    assets.files["bin/entrypoint.mjs"].content,
+    { create: true },
+  );
   if (!isWindows) await Deno.chmod(entrypointPath, 0o775);
 
   if (extraAssets && extraAssets.length > 0) {
