@@ -37,9 +37,14 @@ IMPORTANT: This MUST also be done for the deno variant, otherwise the package wi
 1. Increase versions:
    1. In `cli.ts` for the bin2npm cli
    2. Of target npm package by updating the version in `./bin2npm.toml`
-2. Run `deno task compile`
-3. Run `deno task start` and choose the top-level bin2npm.toml => This runs bin2npm on the compiled output of itself! (Great, isn't it?!?)
-4. Run `deno task publish-npm` to publish on npm
+   3. In Changelog here at the bottom of the readme
+2. Add a new git tag for your new version and push it => will trigger the deploy-npm.yml github workflow!
+
+#### For deploying manually, run
+
+1.  `deno task compile` to compile the deno scripts with the deno executable into self-contained executables
+2.  `deno task assemble-npm` => This runs bin2npm on the compiled output of itself! (Great, isn't it?!?)
+3.  `deno task publish-npm` to publish on npm
 
 ---
 
