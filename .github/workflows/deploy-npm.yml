@@ -7,7 +7,7 @@ on:
 env:
   DENO_DIR: .deno-cache
 jobs:
-  Compile-Bin2Npm:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -28,4 +28,13 @@ jobs:
       - run: deno task pack-assets
       - run: deno task compile
       - run: deno task assemble-npm
-    #   - run: deno task publish-npm
+      - name: Publish if version has been updated
+        uses: pascalgn/npm-publish-action@1.3.9
+        with: # All of theses inputs are optional
+          create_tag: 'false'
+          workspace: './npm'
+          publish_command: 'npm'
+        env: # More info about the environment variables in the README
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
+
