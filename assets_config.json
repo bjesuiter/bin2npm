@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "importPath": "template/.gitignore",
+      "calledName": ".gitignore"
+    },
+    {
+      "importPath": "template/index.mjs",
+      "calledName": "index.mjs"
+    },
+    {
+      "importPath": "template/bin/entrypoint.mjs",
+      "calledName": "bin/entrypoint.mjs"
+    }
+  ]
+}
