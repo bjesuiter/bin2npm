@@ -32,13 +32,15 @@ Run `deno task pack-assets` to pack the files in `/template` into `src-gen/asset
 
 IMPORTANT: This MUST also be done for the deno variant, otherwise the package will not work when installed from deno.land/x!
 
-### Building the npm package
+### Releasing a new version (for deno.land/x and npm)
 
 1. Increase versions:
    1. In `cli.ts` for the bin2npm cli
    2. Of target npm package by updating the version in `./bin2npm.toml`
    3. In Changelog here at the bottom of the readme
-2. Add a new git tag for your new version and push it => will trigger the deploy-npm.yml github workflow!
+2. Run `deno task pack-assets`
+3. Commit all changes
+4. Add a new git tag for your new version and push it => will trigger the deploy-npm.yml github workflow + automatically add it to deno.land/x
 
 #### For deploying manually, run
 
@@ -50,13 +52,17 @@ IMPORTANT: This MUST also be done for the deno variant, otherwise the package wi
 
 # Changelog
 
+## 0.0.4 - 2023-06-10
+
+- First Version built by Github Actions
+
 ## 0.0.3 - 2023-06-10
 
-- fix missing assets for both deno.land/x and npm, by inlining the assets as base64
+- Fix missing assets for both deno.land/x and npm, by inlining the assets as base64
 
 ## 0.0.2 - 2023-06-10
 
-- fixing stdin of wrapped child processes, was not attached to process.stdin before, so selecting the config to use was not possible!
+- Fixing stdin of wrapped child processes, was not attached to process.stdin before, so selecting the config to use was not possible!
 
 ## 0.0.1 - 2023-06-10
 

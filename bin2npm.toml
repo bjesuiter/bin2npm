@@ -3,7 +3,7 @@ outDir         = "npm"
 
 [targetPackageJson]
     name        = "bin2npm"
-    version     = "0.0.3"
+    version     = "0.0.4"
     description = "A cli tool by @bjesuiter which takes one or more binaries for different platforms and wraps them into an npm package for distribution. Can also be used via bin2npm package on npmjs.org"
 
 [[binaries]]
