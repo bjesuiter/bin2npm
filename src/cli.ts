@@ -1,4 +1,5 @@
-import { Select } from "cliffy/prompt";
+import { parseFlags } from "cliffy/flags/mod.ts";
+import { Select } from "cliffy/prompt/mod.ts";
 import { dirname, join } from "std/path/mod.ts";
 import { exists, walk } from "std/fs/mod.ts";
 import { parse } from "std/toml/mod.ts";
@@ -10,26 +11,48 @@ import { copyAssets } from "./builder/copy-assets.ts";
 // Note: This is the version of this bin2npm cli! Do not confuse this with the version of the resulting packages!
 const VERSION = "0.0.3";
 
-// Find bin2npm.toml config files somewhere below CWD
-const configsFound = [];
-for await (
-  const dirent of walk(".", { exts: [".toml"], match: [/bin2npm.toml/] })
-) {
-  configsFound.push(dirent.path);
-}
-
-if (configsFound.length === 0) {
-  console.error(
-    `ERROR: Couldn't find config file 'bin2npm.toml' in '${Deno.cwd}'`,
-  );
-  Deno.exit();
-}
-
-// Ask user which config file to use
-const configPath = await Select.prompt({
-  message: "Which config do you want to use?",
-  options: configsFound.map((path) => ({ value: path })),
+const { flags } = parseFlags(Deno.args, {
+  stopEarly: true,
+  flags: [{
+    name: "config",
+    // aliases: ["hostname"],
+    type: "string",
+  }, {
+    name: "version",
+  }],
 });
+
+if (flags.version) {
+  console.log(VERSION);
+  Deno.exit(0);
+}
+
+let configPath: string;
+if (flags.config) {
+  // If flags.config is defined, use it directly without searching for a config interactively
+  configPath = flags.config;
+} else {
+  // Find bin2npm.toml config files somewhere below CWD, to let the user select what config to use
+  const configsFound = [];
+  for await (
+    const dirent of walk(".", { exts: [".toml"], match: [/bin2npm.toml/] })
+  ) {
+    configsFound.push(dirent.path);
+  }
+
+  if (configsFound.length === 0) {
+    console.error(
+      `ERROR: Couldn't find config file 'bin2npm.toml' in '${Deno.cwd}'`,
+    );
+    Deno.exit();
+  }
+
+  // Ask user which config file to use
+  configPath = await Select.prompt({
+    message: "Which config do you want to use?",
+    options: configsFound.map((path) => ({ value: path })),
+  });
+}
 
 // Define base path for naviation relative to toml config
 const configBasePath = dirname(configPath);

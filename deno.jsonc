@@ -2,6 +2,7 @@
   "tasks": {
     "start": "deno run -A src/cli.ts",
     "dev": "deno run -A --watch src/cli.ts",
+    "version": "deno run -A src/cli.ts --version",
     "pack-assets": "deno run --allow-read https://deno.land/x/asset_builder@1.0.4/asset_builder.ts > src-gen/assets.ts",
     "compile": "deno task compile-linux-x64 & deno task compile-windows-x64 & deno task compile-macos-x64 & deno task compile-macos-arm",
     "compile-base": "deno compile --allow-read='.' --allow-write='.' ",
@@ -10,11 +11,12 @@
     "compile-macos-x64": "deno task compile-base --output compiled/bin2npm_macos_x64 --target x86_64-apple-darwin src/cli.ts ",
     "compile-macos-arm": "deno task compile-base --output compiled/bin2npm_macos_arm --target aarch64-apple-darwin src/cli.ts ",
     "run-compiled-macos": "compiled/bin2npm_macos_x64",
+    "assemble-npm": "deno run -A src/cli.ts --config bin2npm.toml",
     // CAUTION: This publish task can take a long time, due to the big binaries included!
     "publish-npm": "npm publish ./npm"
   },
   "imports": {
-    "cliffy/prompt": "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts",
+    "cliffy/": "https://deno.land/x/cliffy@v0.25.7/",
     "std/": "https://deno.land/std@0.190.0/",
     "zod": "https://deno.land/x/zod@v3.21.4/mod.ts"
   }
