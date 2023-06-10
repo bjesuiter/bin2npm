@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - '*'
+env:
+  DENO_DIR: .deno-cache
 jobs:
   Compile-Bin2Npm:
     runs-on: ubuntu-latest
@@ -15,6 +17,11 @@ jobs:
         # with:
         #     # The Deno version to install. Can be a semver version of a stable release, "canary" for the latest canary, or the Git hash of a specific canary release.
         #     deno-version: # optional, default is 1.x
+      - name: Cache Deno dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ hashFiles('deno.lock') }}
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: deno task pack-assets
