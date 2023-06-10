@@ -32,12 +32,11 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 	const executablePath = join(__dirname, executable.path);
 
-	await execa(executablePath, process.argv.slice(2))
-		.pipeStdout(process.stdout)
-		.pipeStderr(process.stderr)
-		.catch(processResult => {
-			// we can inspect errorneous process results here
-		});
+	await execa(executablePath, process.argv.slice(2), {
+		stdio: 'inherit',
+	}).catch(processResult => {
+		// we can inspect errorneous process results here
+	});
 
 	// if (!fs.existsSync(executablePath))
 	// 	throw new Error(`Executable not found at ${executablePath}.
