@@ -1,6 +1,8 @@
 node_modules
 dist
 npm/
+npm_back
 compiled
 example/dist
+example_back
 .DS_Store
