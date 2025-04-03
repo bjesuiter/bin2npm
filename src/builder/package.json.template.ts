@@ -50,8 +50,8 @@ export async function renderPackageJson(config: TargetPackageJson, outDir = 'dis
 	packageJson.name = config.name;
 	packageJson.version = config.version;
 	packageJson.description = config.description;
-	const binEntries = config.binAliases?.map(alias => [alias, './bin/entrypoint.mjs']) ?? [];
-	binEntries.push([config.name, './bin/entrypoint.mjs']);
+	const binEntries = config.binAliases?.map(alias => [alias, 'bin/entrypoint.mjs']) ?? [];
+	binEntries.push([config.name, 'bin/entrypoint.mjs']);
 	packageJson.bin = Object.fromEntries(binEntries);
 	packageJson.files = [...packageJson.files, ...(config.extraFiles ?? [])];
 
