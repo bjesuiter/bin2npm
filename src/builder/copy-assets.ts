@@ -1,7 +1,7 @@
 import {copy, ensureDir, ensureFile} from '@std/fs';
 import {join} from '@std/path';
 import {ExtraAssetsConfig} from '../types.ts';
-import assets from '../../src-gen/assets.ts';
+import assets from '../gen/assets.ts';
 
 // When run on macos or isLinux, it sets executable flag on entrypoint.mjs
 

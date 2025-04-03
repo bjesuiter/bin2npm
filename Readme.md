@@ -27,7 +27,7 @@ https://github.com/bjesuiter/bin2npm/issues
 ## For Developers of this package
 
 Use `asset-builder` from (https://jsr.io/@codemonument/asset-builder) to have the template folder available to the deno cli.
-Run `deno task pack-assets` to pack the files in `/template` into `src-gen/assets.ts`
+Run `deno task pack-assets` to pack the files in `/template` into `src/gen/assets.ts`
 Must be used in the npm AND the deno variant of this package, otherwise this cli will not work when installed from jsr.io!
 
 ### Releasing a new version (for deno.land/x and npm)

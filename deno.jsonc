@@ -5,7 +5,7 @@
 	"exports": {
 		".": "./src/cli.ts"
 	},
-	"include": ["src", "src-gen", "deno.jsonc", "deno.lock", "Readme.md"],
+	"include": ["src", "deno.jsonc", "deno.lock", "Readme.md"],
 	"exclude": [
 		".github",
 		".vscode",
@@ -20,7 +20,7 @@
 		"dev": "deno run -A --watch src/cli.ts",
 		"version": "deno run -A src/cli.ts --version",
 		"cache": "deno cache --reload --lock=deno.lock src/cli.ts",
-		"pack-assets": "deno run --allow-read jsr:@codemonument/asset-builder > src-gen/assets.ts",
+		"pack-assets": "deno run --allow-read jsr:@codemonument/asset-builder > src/gen/assets.ts",
 		// Publish this bin2npm to jsr
 		"dry": "deno task pack-assets && deno publish --dry-run",
 		"publish": "deno task pack-assets && deno publish",
