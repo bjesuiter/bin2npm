@@ -1,3 +1,3 @@
 throw new Error(
-  "This module shouldn't be required or imported by other modules. Use this module as a CLI."
+	"This package shouldn't be required or imported by other packages. This package only exposes one or more CLI tools."
 );
