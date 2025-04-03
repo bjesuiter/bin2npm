@@ -1,9 +1,11 @@
 {
 	"name": "@bjesuiter/bin2npm",
 	"description": "A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution.",
+	"version": "0.0.4",
 	"exports": {
 		".": "./src/cli.ts"
 	},
+	"include": ["src", "src-gen", "deno.jsonc", "deno.lock", "Readme.md"],
 	"tasks": {
 		"start": "deno run -A src/cli.ts",
 		"dev": "deno run -A --watch src/cli.ts",
@@ -11,8 +13,8 @@
 		"cache": "deno cache --reload --lock=deno.lock src/cli.ts",
 		"pack-assets": "deno run --allow-read jsr:@codemonument/asset-builder > src-gen/assets.ts",
 		// Publish this bin2npm to jsr
-		"dry": "deno publish --dry-run",
-		"publish": "deno publish",
+		"dry": "deno task pack-assets && deno publish --dry-run",
+		"publish": "deno task pack-assets && deno publish",
 		// compile this bin2npm as binary for different platforms
 		"compile": "deno task compile-linux-x64 & deno task compile-windows-x64 & deno task compile-macos-x64 & deno task compile-macos-arm",
 		"compile-base": "deno compile --allow-read='.' --allow-write='.' ",

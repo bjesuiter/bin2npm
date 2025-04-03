@@ -33,9 +33,10 @@ Must be used in the npm AND the deno variant of this package, otherwise this cli
 ### Releasing a new version (for deno.land/x and npm)
 
 1. Increase versions:
-   1. In `cli.ts` for the bin2npm cli
-   2. Of target npm package by updating the version in `./bin2npm.toml`
-   3. In Changelog here at the bottom of the readme
+   1. In `cli.ts` for the bin2npm cli --version command
+   2. In `deno.jsonc` for the JSR deployment of this package
+   3. Of target npm package by updating the version in `./bin2npm.toml`
+   4. In Changelog here at the bottom of the readme
 2. Run `deno task pack-assets`
 3. Commit all changes
 4. Add a new git tag for your new version and push it => will trigger the deploy-npm.yml github workflow + automatically add it to deno.land/x
