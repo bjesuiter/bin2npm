@@ -1,6 +1,6 @@
 # .github/workflows/publish.yml
 
-name: Publish
+name: Publish JSR
 
 on:
   push:

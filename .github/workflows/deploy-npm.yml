@@ -1,4 +1,4 @@
-name: Deploy npm
+name: Deploy NPM
 on:
   workflow_dispatch:
   push:
@@ -15,15 +15,15 @@ jobs:
       - name: Setup Deno
         # You may pin to the exact commit or the version.
         # uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31
-        uses: denoland/setup-deno@v1.1.2
-      - uses: actions/setup-node@v3
+        uses: denoland/setup-deno@v2.0.2
+      - uses: actions/setup-node@v4.3.0
         with:
-          node-version: '20'
+          node-version: '22'
         # with:
         #     # The Deno version to install. Can be a semver version of a stable release, "canary" for the latest canary, or the Git hash of a specific canary release.
         #     deno-version: # optional, default is 1.x
       - name: Cache Deno dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.DENO_DIR }}
           key: ${{ hashFiles('deno.lock') }}
@@ -32,7 +32,7 @@ jobs:
       - run: deno task compile
       - run: deno task assemble-npm
       - id: publish
-        uses: JS-DevTools/npm-publish@v2
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
           package: npm
