@@ -1,9 +1,9 @@
 name: Deploy npm
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - '*'
+  # push:
+  #   tags:
+  #     - '*'
 env:
   DENO_DIR: .deno-cache
 jobs:
