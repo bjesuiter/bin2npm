@@ -6,7 +6,15 @@
 		".": "./src/cli.ts"
 	},
 	"include": ["src", "src-gen", "deno.jsonc", "deno.lock", "Readme.md"],
-	"exclude": [".github", ".vscode", "TODO.md", "assets_config.json", "bin2npm.toml", "example"],
+	"exclude": [
+		".github",
+		".vscode",
+		"TODO.md",
+		"assets_config.json",
+		"bin2npm.toml",
+		"example",
+		"template"
+	],
 	"tasks": {
 		"start": "deno run -A src/cli.ts",
 		"dev": "deno run -A --watch src/cli.ts",
