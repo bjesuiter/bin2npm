@@ -4,18 +4,26 @@ A helper cli which takes one or more binaries for different platforms and wraps 
 
 ## Installation via deno
 
-1. Install from deno.land/x (installs exactly this url, so it will always run the latest version of itself!)
-   `deno install --allow-read='.' --allow-write='.' -n bin2npm https://deno.land/x/bin2npm/src/cli.ts`
+1. Install from JSR
+   `deno install --global --allow-read='.' --allow-write='.' -n bin2npm jsr:@bjesuiter/bin2npm`
 
 2. Write a config (TODO @bjesuiter)
 
 ## Installation via npm
 
-Global Installation: `npm i -g bin2npm`
+Package URL: https://www.npmjs.com/package/bin2npm
 
+Global Installation: `npm i -g bin2npm`
 Local Installation: `npm i -D bin2npm`
 
-## Usage (for both deno & npm)
+## Installation via bun
+
+Package URL: https://www.npmjs.com/package/bin2npm
+
+Global Installation: `bun i -g bin2npm`
+Local Installation: `bun i -D bin2npm`
+
+## Usage (for all: deno, npm & bun)
 
 1. Write a config file (TODO @bjesuiter)
 2. Run `bin2npm` => It will search for all bin2npm.toml files inside your CWD
@@ -24,13 +32,17 @@ Local Installation: `npm i -D bin2npm`
 If you have any issues, please open an Issue at:
 https://github.com/bjesuiter/bin2npm/issues
 
-## For Developers of this package
+---
+
+# Dev Docs
+
+## Asset building for compilation
 
 Use `asset-builder` from (https://jsr.io/@codemonument/asset-builder) to have the template folder available to the deno cli.
 Run `deno task pack-assets` to pack the files in `/template` into `src/gen/assets.ts`
 Must be used in the npm AND the deno variant of this package, otherwise this cli will not work when installed from jsr.io!
 
-### Releasing a new version (for deno.land/x and npm)
+## Releasing a new version (for JSR and npm)
 
 1. Increase versions:
    1. In `cli.ts` for the bin2npm cli --version command
@@ -39,7 +51,7 @@ Must be used in the npm AND the deno variant of this package, otherwise this cli
    4. In Changelog here at the bottom of the readme
 2. Run `deno task pack-assets`
 3. Commit all changes
-4. Add a new git tag for your new version and push it => will trigger the deploy-npm.yml github workflow + automatically add it to deno.land/x
+4. Add a new git tag for your new version and push it => will trigger the deploy-npm.yml github workflow and the publish-jsr workflow
 
 #### For deploying manually, run
 
@@ -50,6 +62,10 @@ Must be used in the npm AND the deno variant of this package, otherwise this cli
 ---
 
 # Changelog
+
+## 0.0.5 - 2025-04-03
+
+- Update dependencies and add jsr deployment
 
 ## 0.0.4 - 2023-06-10
 
