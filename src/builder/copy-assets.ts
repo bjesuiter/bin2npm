@@ -1,5 +1,4 @@
 import {copy, ensureDir, ensureFile} from '@std/fs';
-import {isWindows} from '@std/path/os';
 import {join} from '@std/path';
 import {ExtraAssetsConfig} from '../types.ts';
 import assets from '../../src-gen/assets.ts';
@@ -23,7 +22,7 @@ export async function copyAssets(extraAssets?: ExtraAssetsConfig, outDir = 'dist
 	const entrypointPath = join(outDir, 'bin/entrypoint.mjs');
 	await ensureFile(entrypointPath);
 	await Deno.writeFile(entrypointPath, assets.files['bin/entrypoint.mjs'].content, {create: true});
-	if (!isWindows) await Deno.chmod(entrypointPath, 0o775);
+	if (Deno.build.os !== 'windows') await Deno.chmod(entrypointPath, 0o775);
 
 	if (extraAssets && extraAssets.length > 0) {
 		for (const asset of extraAssets) {
