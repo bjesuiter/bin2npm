@@ -36,6 +36,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 		stdio: 'inherit',
 	}).catch(processResult => {
 		// we can inspect errorneous process results here
+		console.error(processResult);
 	});
 
 	// if (!fs.existsSync(executablePath))
