@@ -8,7 +8,7 @@
 		"start": "deno run -A src/cli.ts",
 		"dev": "deno run -A --watch src/cli.ts",
 		"version": "deno run -A src/cli.ts --version",
-		"cache": "deno cache --reload --lock=deno.lock --lock-write src/cli.ts",
+		"cache": "deno cache --reload --lock=deno.lock src/cli.ts",
 		"pack-assets": "deno run --allow-read jsr:@codemonument/asset-builder > src-gen/assets.ts",
 		"compile": "deno task compile-linux-x64 & deno task compile-windows-x64 & deno task compile-macos-x64 & deno task compile-macos-arm",
 		"compile-base": "deno compile --allow-read='.' --allow-write='.' ",
