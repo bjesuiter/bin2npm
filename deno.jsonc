@@ -1,7 +1,7 @@
 {
 	"name": "@bjesuiter/bin2npm",
 	"description": "A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution.",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"exports": {
 		".": "./src/cli.ts"
 	},
