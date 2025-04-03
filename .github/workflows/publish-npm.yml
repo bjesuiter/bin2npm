@@ -32,7 +32,7 @@ jobs:
       - run: deno task compile
       - run: deno task assemble-npm
       - id: publish
-        uses: JS-DevTools/npm-publish@v3
+        uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
           package: npm
