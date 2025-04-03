@@ -11,10 +11,12 @@ outDir         = "npm"
     # platform should be one of nodejs's os.platform() values:
     # for Node 16 LTS: 'aix', 'darwin', 'freebsd','linux', 'openbsd', 'sunos', and 'win32'
     # see https://nodejs.org/docs/latest-v16.x/api/os.html#osplatform
+    # These are only the allowed values. You have to provide the correct binary for this to work.
     platform = "linux"
     # arch should be one of nodejs's os.arch() values: 
     # for Node 16 LTS: 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', and 'x64'
     # see https://nodejs.org/docs/latest-v16.x/api/os.html#osarch
+    # These are only the allowed values. You have to provide the correct binary for this to work.
     arch = "x64"
 
 [[binaries]]
