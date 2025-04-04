@@ -1,8 +1,13 @@
 # bin2npm
 
+<!-- Badge found here: https://jsr.io/docs/badges -->
+
+[![JSR](https://jsr.io/badges/@bjesuiter/bin2npm)](https://jsr.io/@bjesuiter/bin2npm)
+![NPM Version](https://img.shields.io/npm/v/bin2npm?label=NPM&labelColor=%23CB3837)
+
 A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution.
 
-## Installation via deno
+## Installation via deno/jsr
 
 1. Install from JSR
    `deno install --global --allow-read='.' --allow-write='.' -n bin2npm jsr:@bjesuiter/bin2npm`
