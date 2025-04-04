@@ -7,30 +7,71 @@
 
 A helper cli which takes one or more binaries for different platforms and wraps them into an npm package for distribution.
 
-## Installation via deno/jsr
+## Run/Install via deno (from jsr.io)
 
-1. Install from JSR
-   `deno install --global --allow-read='.' --allow-write='.' -n bin2npm jsr:@bjesuiter/bin2npm`
+**Opt1: Run directly from JSR**
 
-## Installation via npm
+```bash
+deno run --allow-read='.' --allow-write='.' jsr:@bjesuiter/bin2npm --config ./bin2npm.toml
+```
+
+**Opt2: Install globally on your host machine from JSR**
+
+```bash
+deno install --global --allow-read='.' --allow-write='.' -n bin2npm jsr:@bjesuiter/bin2npm
+```
+
+## Run/Install via npm
 
 Package URL: https://www.npmjs.com/package/bin2npm
 
-Global Installation: `npm i -g bin2npm`
-Local Installation: `npm i -D bin2npm`
+**Opt1: Run directly from npm**
 
-## Installation via bun
+```bash
+# with config file search
+npx bin2npm
+
+# with explicit config file
+npx bin2npm --config ./bin2npm.toml
+```
+
+**Opt2: Install on your host machine from npm**
+
+```bash
+# global install
+npm i -g bin2npm
+
+# local install
+npm i -D bin2npm
+```
+
+## Run/Install via bun
 
 Package URL: https://www.npmjs.com/package/bin2npm
 
-Global Installation: `bun i -g bin2npm`
-Local Installation: `bun i -D bin2npm`
+**Opt1: Run directly from bun**
+
+```bash
+bunx bin2npm --config ./bin2npm.toml
+```
+
+**Opt2: Install globally on your host machine from bun**
+
+```bash
+# global install
+bun i -g bin2npm
+
+# local install
+bun i -D bin2npm
+```
 
 ## Usage (for all: deno, npm & bun)
 
 1. Write a config file (see: example config file)
-2. Run `bin2npm` => It will search for all bin2npm.toml files inside your CWD
-3. Finished! If your config was correct, then your output npm package should be in your configured output dir!
+2. Run `bin2npm` (only works when installed globally, alternatively use npx, bunx, or direct running via jsr)
+   => It will search for all bin2npm.toml files inside your CWD
+3. Alternatively, run `bin2npm --config ./bin2npm.toml` to specify a config file directly
+4. Finished! If your config was correct, then your output npm package should be in your configured output dir!
 
 If you have any issues, please open an Issue at:
 https://github.com/bjesuiter/bin2npm/issues
