@@ -7,8 +7,6 @@ A helper cli which takes one or more binaries for different platforms and wraps 
 1. Install from JSR
    `deno install --global --allow-read='.' --allow-write='.' -n bin2npm jsr:@bjesuiter/bin2npm`
 
-2. Write a config (TODO @bjesuiter)
-
 ## Installation via npm
 
 Package URL: https://www.npmjs.com/package/bin2npm
@@ -25,12 +23,60 @@ Local Installation: `bun i -D bin2npm`
 
 ## Usage (for all: deno, npm & bun)
 
-1. Write a config file (TODO @bjesuiter)
+1. Write a config file (see: example config file)
 2. Run `bin2npm` => It will search for all bin2npm.toml files inside your CWD
 3. Finished! If your config was correct, then your output npm package should be in your configured output dir!
 
 If you have any issues, please open an Issue at:
 https://github.com/bjesuiter/bin2npm/issues
+
+## Example Config
+
+```toml
+# File: bin2npm.toml
+bin2NpmVersion = "0"
+outDir         = "npm"
+
+[targetPackageJson]
+    name        = "bin2npm"
+    version     = "0.0.6"
+    description = "A cli tool by @bjesuiter which takes one or more binaries for different platforms and wraps them into an npm package for distribution. Can also be used via bin2npm package on npmjs.org"
+
+[[binaries]]
+    # path to the binary you want to wrap, based on the cwd where you run bin2npm
+    path = "compiled/bin2npm_linux_x64"
+    # platform should be one of nodejs's os.platform() values:
+    # for Node 16 LTS: 'aix', 'darwin', 'freebsd','linux', 'openbsd', 'sunos', and 'win32'
+    # see https://nodejs.org/docs/latest-v16.x/api/os.html#osplatform
+    # These are only the allowed values. You have to provide the correct binary for this to work.
+    platform = "linux"
+    # arch should be one of nodejs's os.arch() values:
+    # for Node 16 LTS: 'arm', 'arm64', 'ia32', 'mips', 'mipsel', 'ppc', 'ppc64', 's390', 's390x', and 'x64'
+    # see https://nodejs.org/docs/latest-v16.x/api/os.html#osarch
+    # These are only the allowed values. You have to provide the correct binary for this to work.
+    arch = "x64"
+
+[[binaries]]
+    path     = "compiled/bin2npm_macos_x64"
+    platform = "darwin"
+    arch     = "x64"
+
+[[binaries]]
+    path     = "compiled/bin2npm_macos_arm"
+    platform = "darwin"
+    arch     = "arm64"
+
+[[binaries]]
+    path     = "compiled/bin2npm_windows_x64.exe"
+    platform = "win32"
+    arch     = "x64"
+
+# copy extra files from the current directory into the npm package
+[[extraAssets]]
+    from = "Readme.md"
+    to   = "Readme.md"
+
+```
 
 ---
 
