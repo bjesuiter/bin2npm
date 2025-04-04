@@ -9,7 +9,7 @@ import {renderExecutables} from './builder/executables.template.ts';
 import {copyAssets} from './builder/copy-assets.ts';
 
 // Note: This is the version of this bin2npm cli! Do not confuse this with the version of the resulting packages!
-const VERSION = '0.0.6';
+const VERSION = '0.0.7';
 
 const {flags} = parseFlags(Deno.args, {
 	stopEarly: true,
